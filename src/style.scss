@@ -1,0 +1,16 @@
+@import "components/button/button"; 
+@import "components/plan/plan"; /* Не может resolve'нуть пути, поскольку код из этих файлов как бы вставляется сюда, и соответственно путь "img/enter.png" здесь не существует. Поэтому, css-loader, получая файл в таком формате, не может ничего сделать и прыскает ошибкой. Нужно добавить в промежуток resolve-url-loader, но чтоб он заработал корректно у sass-loader'а включить генерацию sourceMap */
+
+body {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #999;
+    -webkit-font-smoothing: antialiased;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
