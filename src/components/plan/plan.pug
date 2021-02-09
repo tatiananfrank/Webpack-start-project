@@ -24,3 +24,6 @@ mixin plan(options)
 
             .buy-button
                 +btn({title: "Order Now", isBlue: options.isBusiness})
+
+            if options.photo
+                img(src = require('./components/plan/img/' + options.photo), alt = 'photo')
