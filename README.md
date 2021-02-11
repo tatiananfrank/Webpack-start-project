@@ -1,9 +1,22 @@
 # Webpack-start-project
-Стартовый проект с Webpack. Стэк: pug (jade), sass (scss), js. А также плюшки, вроде postcss (autoprefixer, cssnano), babel
+Стартовый проект с Webpack.<br>
+Стэк: pug (jade), sass (scss), js.<br>
+А также плюшки, вроде postcss (autoprefixer, cssnano), babel
 
-<hr>
 
-Структура проекта:
+<h2>Установка</h2>
+Требуется установленный Node.js.<br>
+<ol>
+  <li>Клонировать/загрузить этот репозиторий</li>
+  <li>Установить зависимости проекта: <code>npm install</code></li>
+</ol>
+
+<h2>Команды</h2>
+<pre>
+npm run build         # простая сборка
+</pre>
+
+<h2>Структура проекта</h2>
 <pre>
 dist/                 # Папка сборки
 src/                  # Исходники
@@ -24,15 +37,8 @@ src/                  # Исходники
   style.scss          # Главный файл стилей (подключаем сюда все стили компонентов)
 </pre>
 
-<hr>
 
-Все <b>assets внутри pug</b> файлов подключаются через require:
-<pre>img(src = require('./components/plan/img/enter_2.png'), alt = 'photo')</pre>
-
-Все <b>assets внутри scss</b> файлов поключаются через простое указание относительного пути:
-<pre>background-image: url(img/enter.png);</pre>
-
-<hr>
+<h2>Подробнее</h2>
 
 Каждый <b>pug</b> файл инклюдит внутри себя другие pug файлы:
 <pre>include ./components/plan/plan</pre>
@@ -53,3 +59,14 @@ importAll(context);</pre>
 НО можно и ручками там же:
 <pre>// Ниже импортируем все js файлы из компонентов
 //import "./components/button/button.js";</pre>
+
+Динамический импорт можно добавить и для scss файлов (таким же образом, как и для js):
+<pre>let context = require.context("./", true, /\.scss$/);</pre>
+
+<hr>
+
+Все <b>assets внутри pug</b> файлов подключаются через require:
+<pre>img(src = require('./components/plan/img/enter_2.png'), alt = 'photo')</pre>
+
+Все <b>assets внутри scss</b> файлов поключаются через простое указание относительного пути:
+<pre>background-image: url(img/enter.png);</pre>
