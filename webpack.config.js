@@ -58,6 +58,13 @@ module.exports = {
                 generator: {
                     filename: 'fonts/[name][ext]'
                 }
+            }, {
+                test: /\.(ico|png|jpg|jpeg)$/,
+                include: [ path.resolve(__dirname, 'src/favicon') ], // Обрабатываем только фавиконки // мб лучше просто скопировать в dist?
+                type: 'asset/resource',
+                generator: {
+                    filename: 'favicon/[name][ext]'
+                }
             }
         ]
     }, 
