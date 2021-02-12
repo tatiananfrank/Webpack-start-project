@@ -22,7 +22,7 @@
     background-size: auto;
 
     &-business {
-        color: #008ed6;
+        color: $blue;
     }
 }
 
@@ -32,7 +32,7 @@
     border-bottom: 1px solid #e0e0e0;
 
     &-business {
-        background-color: #008ed6;
+        background-color: $blue;
         color: #fafafa;
     }
 

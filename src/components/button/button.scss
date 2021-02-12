@@ -1,7 +1,7 @@
 .button {
     outline: none;
     border: 1px solid #e0e0e0;
-    color: #008ed6;
+    color: $blue;
     padding: 14px 40px;
     border-radius: 3px;
     font-size: 14px;
@@ -10,13 +10,13 @@
     cursor: pointer;
 
     &:hover {
-        background: #008ed6;
-        border: 1px solid #008ed6;
+        background: $blue;
+        border: 1px solid $blue;
         color: #fff;
     }
 
     &-blue {
         color: #fff;
-        background-color: #008ed6;
+        background-color: $blue;
     }
 }

@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Helvetica Neue";
+    src: url(../fonts/HelveticaNeueCyr-Bold.woff2) format("woff2"),
+         url(../fonts/HelveticaNeueCyr-Bold.woff) format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #999;
+    -webkit-font-smoothing: antialiased;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
