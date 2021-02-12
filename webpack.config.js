@@ -25,10 +25,7 @@ module.exports = {
                 test: /\.js$/,
                 include: [ path.resolve(__dirname, 'src') ],
                 use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: [ ['@babel/preset-env', {targets: "defaults"}] ]
-                    }
+                    loader: "babel-loader", // targets внутри конфига можно удалить, если в .browserslistrc указаны значения, отличные от defaults
                 }
             }, {
                 test: /\.(jade|pug)$/,
