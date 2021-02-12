@@ -31,7 +31,7 @@ module.exports = {
                 test: /\.(jade|pug)$/,
                 loader: "pug-loader"
             }, {
-                test: /\.scss/,
+                test: /\.(scss|css)$/,
                 use: [{
                     loader: "style-loader"
                 }, {
@@ -39,7 +39,7 @@ module.exports = {
                 }, {
                     loader: "postcss-loader" // includes autoprefixer, normalize.css
                 }, {
-                    loader: "resolve-url-loader"
+                    loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
                 }, {
                     loader: "sass-loader",
                     options: {
