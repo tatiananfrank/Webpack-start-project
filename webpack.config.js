@@ -3,9 +3,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const isProductionMode = process.env.NODE_ENV === "production";
 
 module.exports = {
-    //mode: 'development', //
+    mode: isProductionMode ? "production" : "development",
 
     context: path.resolve(__dirname, 'src'), //Директория, где находятся все модули
 
@@ -33,7 +36,9 @@ module.exports = {
             }, {
                 test: /\.(scss|css)$/,
                 use: [{
-                    loader: "style-loader"
+                    /* loader: "style-loader" */
+                    /* loader: isProductionMode ? MiniCssExtractPlugin.loader : "style-loader" */
+                    loader: MiniCssExtractPlugin.loader
                 }, {
                     loader: "css-loader"
                 }, {
@@ -76,5 +81,9 @@ module.exports = {
             inject: true
         }),
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            /* filename: isProductionMode ? "[name].[contenthash].css" : "[name].css", */
+            filename: "style.css",
+        }),
     ]
 };
