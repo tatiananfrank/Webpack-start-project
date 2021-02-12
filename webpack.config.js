@@ -40,6 +40,8 @@ module.exports = {
                 }, {
                     loader: "css-loader"
                 }, {
+                    loader: "postcss-loader" // includes autoprefixer, normalize.css
+                }, {
                     loader: "resolve-url-loader"
                 }, {
                     loader: "sass-loader",
