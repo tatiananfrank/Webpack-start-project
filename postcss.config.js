@@ -10,6 +10,7 @@ module.exports = {
             "postcss-normalize", // normalize.css
             {
                 // Options 
+                //forceImport: 'normalize.css' // Вставляет нормализацию в начало css файла
             },
         ],
     ],

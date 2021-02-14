@@ -5,11 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isProductionMode = process.env.NODE_ENV === "production";
-
 module.exports = {
-    mode: isProductionMode ? "production" : "development",
-
     context: path.resolve(__dirname, 'src'), //Директория, где находятся все модули
 
     entry: {
@@ -35,12 +31,16 @@ module.exports = {
                 loader: "pug-loader"
             }, {
                 test: /\.(scss|css)$/,
+                //include: [ path.resolve(__dirname, 'src') ],
                 use: [{
+                    // fallback to style-loader in development
+                    /* loader: process.env.NODE_ENV !== "production"
+                                ? "style-loader"
+                                : MiniCssExtractPlugin.loader, */
                     /* loader: "style-loader" */
-                    /* loader: isProductionMode ? MiniCssExtractPlugin.loader : "style-loader" */
                     loader: MiniCssExtractPlugin.loader
                 }, {
-                    loader: "css-loader"
+                    loader: "css-loader",
                 }, {
                     loader: "postcss-loader" // includes autoprefixer, normalize.css
                 }, {
@@ -48,7 +48,10 @@ module.exports = {
                 }, {
                     loader: "sass-loader",
                     options: {
-                        sourceMap: true
+                        sourceMap: true,
+                        sassOptions: {
+                            outputStyle: "expanded"
+                        }
                     }
                 }]
             }, {
@@ -82,7 +85,6 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            /* filename: isProductionMode ? "[name].[contenthash].css" : "[name].css", */
             filename: "style.css",
         }),
     ]

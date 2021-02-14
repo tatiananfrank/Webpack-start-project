@@ -1,5 +1,7 @@
-/* @import "normalize.css"; */
-@import-normalize;
+ @import "normalize.css"; // Импорт библиотеки postcss-normalize
+/* @import-normalize; */ 
+
+/* @import "scss/normalize"; */
 
 @import "scss/variables";
 @import "scss/main";
