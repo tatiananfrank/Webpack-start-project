@@ -14,25 +14,7 @@ module.exports = merge(common, {
                 }, {
                     loader: "css-loader",
                 }, {
-                    loader: "postcss-loader",
-                    options: {
-                        postcssOptions: {
-                            plugins: [
-                                [
-                                    "postcss-preset-env", // postcss-preset-env includes autoprefixer, so adding it separately is not necessary if you already use the preset
-                                    {
-                                        // Options
-                                    },
-                                ], [
-                                    "postcss-normalize", // normalize.css
-                                    {
-                                        // Options 
-                                        //forceImport: 'normalize.css' // Вставляет нормализацию в начало css файла
-                                    },
-                                ]
-                            ]
-                        }
-                    }
+                    loader: "postcss-loader", // includes autoprefixer, normalize.css
                 }, {
                     loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
                 }, {
