@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(common, {
     mode: "production",
+    devtool: "source-map",
 
     module: {
         rules: [{
@@ -14,7 +15,38 @@ module.exports = merge(common, {
                 }, {
                     loader: "css-loader",
                 }, {
-                    loader: "postcss-loader" // includes autoprefixer, normalize.css
+                    loader: "postcss-loader", // includes autoprefixer, normalize.css
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    "postcss-preset-env", // postcss-preset-env includes autoprefixer, so adding it separately is not necessary if you already use the preset
+                                    {
+                                        // Options
+                                    },
+                                ], [
+                                    "postcss-normalize", // normalize.css
+                                    {
+                                        // Options 
+                                        //forceImport: 'normalize.css' // Вставляет нормализацию в начало css файла
+                                    },
+                                ], [
+                                    "cssnano",
+                                    {
+                                        "preset": [
+                                            "default",  
+                                            {
+                                                // Options
+                                                discardComments: true,
+                                                normalizeUrl: false
+                                            }
+                                        ],
+                                        "plugins": []
+                                    }
+                                ]
+                            ]
+                        }
+                    }
                 }, {
                     loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
                 }, {

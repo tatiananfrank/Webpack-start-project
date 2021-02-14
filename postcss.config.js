@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
     plugins: [
         [
             "postcss-preset-env", // postcss-preset-env includes autoprefixer, so adding it separately is not necessary if you already use the preset
@@ -26,4 +26,4 @@ module.exports = {
             }
         ]
     ],
-};
+}; */
