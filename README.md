@@ -1,7 +1,7 @@
 # Webpack-start-project
 Стартовый проект с Webpack.<br>
 Стэк: pug (jade), sass (scss), js.<br>
-А также плюшки, вроде postcss (autoprefixer, cssnano), babel
+А также плюшки, вроде <a href="https://babeljs.io/">Babel</a>, <a href="https://github.com/postcss/postcss">postcss</a> (<a href="https://github.com/csstools/postcss-normalize">normalize.css</a>, <a href="https://github.com/csstools/postcss-preset-env#autoprefixer">autoprefixer</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a>), webpack dev server (с HMR).
 
 
 <h2>Установка</h2>
@@ -11,10 +11,14 @@
   <li>Установить зависимости проекта: <code>npm install</code></li>
 </ol>
 
+
 <h2>Команды</h2>
 <pre>
-npm run build         # простая сборка
+npm run dev           # Сборка для разработки
+npm run build         # Сборка для продакшн
+npm run start         # Запуск веб-сервера
 </pre>
+
 
 <h2>Структура проекта</h2>
 <pre>
@@ -38,6 +42,12 @@ src/                  # Исходники
   index.pug           # Главный шаблон проекта (передается в конфиге в HtmlWebpackPlugin)
   script.js           # Точка входа вебпака (подлючаем сюда все скрипты компонентов и главный файл стилей)
   style.scss          # Главный файл стилей (подключаем сюда все переменные, основные стили и стили компонентов), файл не содержит ничего кроме импортов!
+.browserslistrc       # Поддерживаемые проектом браузеры (используется в Babel, postcss)
+babel.config.json     # Конфигурация Babel
+postcss.config.js     # Конфигурация postcss
+webpack.common.js     # Общий конфиг
+webpack.dev.js        # Конфиг для разработки
+webpack.prod.js       # Конфиг для продакшн
 </pre>
 
 
@@ -73,3 +83,10 @@ importAll(context);</pre>
 
 Все <b>assets внутри scss</b> файлов поключаются через простое указание относительного пути:
 <pre>background-image: url(img/enter.png);</pre>
+
+
+<h2>Недоработки / Нюансы</h2>
+
+В конфиге Babel <code>preset-env</code> имеет значение <code>"targets": "defaults"</code>, которое является дубляжом содержимого .browserslistrc. Причина кроется в том, что <code>preset-env</code> не распознает значение <code>defaults</code>, указанное в .browserslistrc, поэтому нужно передавать его явно. Подробнее <a href="https://babeljs.io/docs/en/babel-preset-env#no-targets">тут</a>. <br><br>
+
+Конфиг webpack.dev.js содержит параметр <a href="https://webpack.js.org/configuration/target/#target"><code>target: "web"</code></a>. И будет содержать до тех пор, пока не будет решена <a href="https://github.com/webpack/webpack-dev-server/issues/2758">проблема совместимости HMR и live reload dev server'а с 5-ой версией webpack'а</a>.
