@@ -4,9 +4,9 @@
 Стэк: pug (jade), sass (scss), js.
 <br>
 А также плюшки, вроде <a href="https://babeljs.io/">Babel</a>, <a href="https://github.com/postcss/postcss">postcss</a> (<a href="https://github.com/csstools/postcss-normalize">normalize.css</a>, <a href="https://github.com/csstools/postcss-preset-env#autoprefixer">autoprefixer</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a>), webpack dev server (с HMR).
-<br>
-<br>
 
+
+<h2>Содержание</h2>
 <ul>
   <li><a href="#installation">Установка</a></li>
   <li><a href="#commands">Команды</a></li>
