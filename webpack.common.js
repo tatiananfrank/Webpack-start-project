@@ -3,6 +3,7 @@
 const path = require("path");
 /* const fs = require("fs"); */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 /* function generateHtmlPlugins(templateDir) {
@@ -57,14 +58,14 @@ module.exports = {
                 generator: {
                     filename: 'fonts/[name][ext]'
                 }
-            }, {
+            }, /* {
                 test: /\.(ico|png|jpg|jpeg)$/,
                 include: [ path.resolve(__dirname, 'src/favicon') ], // Обрабатываем только фавиконки // мб лучше просто скопировать в dist?
                 type: 'asset/resource',
                 generator: {
                     filename: 'favicon/[name][ext]'
                 }
-            }
+            } */
         ]
     }, 
 
@@ -72,7 +73,12 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'pages/index.pug',
-            inject: true
+            // inject: true //
+            inject: "body",
+        }),
+        new FaviconsWebpackPlugin({
+            logo: "./favicon/favicon.png",
+            prefix: "favicon/"
         }),
         new CleanWebpackPlugin(),
     ]/* .concat(htmlPlugins), */
