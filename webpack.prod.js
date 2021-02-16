@@ -11,7 +11,10 @@ module.exports = merge(common, {
                 test: /\.(scss|css)$/,
                 //include: [ path.resolve(__dirname, 'src') ],
                 use: [{
-                    loader: MiniCssExtractPlugin.loader
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../', // Specifies a custom public path for the external resources like images, files, etc inside CSS. Works like output.publicPath
+                    }
                 }, {
                     loader: "css-loader",
                 }, {
@@ -31,9 +34,16 @@ module.exports = merge(common, {
         ]
     }, 
 
+    /* resolve: {
+        alias: {
+
+        }
+    }, */
+
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "style.css",
+            // filename: "style.css", //
+            filename: "css/style.css",
         }),
     ]
 });

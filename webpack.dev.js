@@ -14,6 +14,7 @@ module.exports = merge(common, {
         compress: true,
         open: true,
         hot: true, // Enables Hot Module Replacement
+        //writeToDisk: true, 
     },
 
     module: {
