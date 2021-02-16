@@ -2,7 +2,7 @@
 /* @import-normalize; */ 
 
 @import "scss/variables";
-@import "scss/main";
+@import "scss/global";
 // Ниже импортируем все scss файлы из компонентов
 @import "components/button/button";
 @import "components/plan/plan";
