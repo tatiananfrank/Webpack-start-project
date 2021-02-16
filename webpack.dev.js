@@ -14,19 +14,17 @@ module.exports = merge(common, {
         compress: true,
         open: true,
         hot: true, // Enables Hot Module Replacement
-        //writeToDisk: true, 
     },
 
     module: {
         rules: [{
                 test: /\.(scss|css)$/,
-                //include: [ path.resolve(__dirname, 'src') ],
                 use: [{
                     loader: "style-loader"
                 }, {
                     loader: "css-loader",
                 }, {
-                    loader: "postcss-loader", // includes autoprefixer, normalize.css
+                    loader: "postcss-loader",
                 }, {
                     loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
                 }, {

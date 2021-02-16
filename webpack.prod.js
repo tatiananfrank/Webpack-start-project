@@ -9,7 +9,6 @@ module.exports = merge(common, {
     module: {
         rules: [{
                 test: /\.(scss|css)$/,
-                //include: [ path.resolve(__dirname, 'src') ],
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
@@ -18,7 +17,7 @@ module.exports = merge(common, {
                 }, {
                     loader: "css-loader",
                 }, {
-                    loader: "postcss-loader", // includes autoprefixer, normalize.css, cssnano
+                    loader: "postcss-loader",
                 }, {
                     loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
                 }, {
@@ -34,15 +33,8 @@ module.exports = merge(common, {
         ]
     }, 
 
-    /* resolve: {
-        alias: {
-
-        }
-    }, */
-
     plugins: [
         new MiniCssExtractPlugin({
-            // filename: "style.css", //
             filename: "css/style.css",
         }),
     ]

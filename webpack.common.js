@@ -30,7 +30,6 @@ module.exports = {
     },
 
     output: {
-        // filename: "[name].js", //
         filename: "js/[name].js",
         path: path.resolve(__dirname, "dist"),
         publicPath: "./"
@@ -50,7 +49,7 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'img/[name][ext]' // Куда положить файлы на выходе (в dist) // можно еще добавит [path], чтобы избежать конфликтов между картинками с одинак именами
+                    filename: 'img/[name][ext]' // Куда положить файлы на выходе (в dist) // можно еще добавит [path], чтобы избежать конфликтов между картинками с одинаковыми именами
                 }
             }, {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -58,14 +57,7 @@ module.exports = {
                 generator: {
                     filename: 'fonts/[name][ext]'
                 }
-            }, /* {
-                test: /\.(ico|png|jpg|jpeg)$/,
-                include: [ path.resolve(__dirname, 'src/favicon') ], // Обрабатываем только фавиконки // мб лучше просто скопировать в dist?
-                type: 'asset/resource',
-                generator: {
-                    filename: 'favicon/[name][ext]'
-                }
-            } */
+            }, 
         ]
     }, 
 
@@ -73,7 +65,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'pages/index.pug',
-            // inject: true //
             inject: "body",
         }),
         new FaviconsWebpackPlugin({
