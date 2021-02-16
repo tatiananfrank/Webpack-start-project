@@ -3,7 +3,7 @@
 <br>
 Стэк: pug (jade), sass (scss), js.
 <br>
-А также плюшки, вроде <a href="https://babeljs.io/">Babel</a>, <a href="https://github.com/postcss/postcss">postcss</a> (<a href="https://github.com/csstools/postcss-normalize">normalize.css</a>, <a href="https://github.com/csstools/postcss-preset-env#autoprefixer">autoprefixer</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a>), webpack dev server (с HMR).
+А также плюшки, вроде <a href="https://babeljs.io/">Babel</a>, <a href="https://github.com/postcss/postcss">postcss</a> (<a href="https://github.com/csstools/postcss-normalize">normalize.css</a>, <a href="https://github.com/csstools/postcss-preset-env#autoprefixer">autoprefixer</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a>), <a href="https://github.com/jantimon/favicons-webpack-plugin">favicons webpack plugin</a>, webpack dev server (с HMR).
 
 
 <h2>Содержание</h2>
@@ -17,9 +17,8 @@
 
 
 <h2 id="installation">Установка</h2>
-Требуется установленный Node.js.
-<br>
 <ol>
+  <li>Установить Node.js</li>
   <li>Клонировать/загрузить этот репозиторий</li>
   <li>Установить зависимости проекта: <code>npm install</code></li>
 </ol>
@@ -44,17 +43,18 @@ src/                  # Исходники
       button.js
       img/
         picture.png   
-  favicon/            # Фавиконки для проекта
-    favicon.ico
+  favicon/            # Фавиконка для проекта
+    favicon.png
   fonts/              # Шрифты для проекта
     font.woff
     font.woff2
+  pages/              # Папка с шаблонами страниц
+    index.pug         
   scss/
-    main.scss         # Основные стили проекта
+    global.scss       # Основные стили проекта
     variables.scss    # Все переменные проекта
-  index.pug           # Главный шаблон проекта (передается в конфиге в HtmlWebpackPlugin)
   script.js           # Точка входа вебпака (подлючаем сюда все скрипты компонентов и главный файл стилей)
-  style.scss          # Главный файл стилей (подключаем сюда все переменные, основные стили и стили компонентов), файл не содержит ничего кроме импортов!
+  style.scss          # Импорт всех стилей (подключаем сюда все переменные, основные стили и стили компонентов), файл не содержит ничего кроме импортов!
 .browserslistrc       # Поддерживаемые проектом браузеры (используется в Babel, postcss)
 babel.config.json     # Конфигурация Babel
 postcss.config.js     # Конфигурация postcss
@@ -68,14 +68,13 @@ webpack.prod.js       # Конфиг для продакшн
 
 Каждый <b>pug</b> файл инклюдит внутри себя другие pug файлы:
 <pre>
-include ./components/plan/plan
+include path/to/pug/component/component-name
 </pre>
 
-Все <b>scss</b> файлы импортируются в главный файл style.scss:
+Все <b>scss</b> файлы импортируются в файл style.scss, который не содержит ничего, кроме импортов:
 <pre>
 // Ниже импортируем все scss файлы из компонентов
-@import "components/button/button";
-@import "components/plan/plan";
+@import "path/to/scss/component/component-name";
 </pre>
 
 Сам style.scss для включения в сборку импортируется в главный файл script.js:
@@ -93,24 +92,21 @@ importAll(context);
 НО можно и ручками там же:
 <pre>
 // Ниже импортируем все js файлы из компонентов
-//import "./components/button/button.js";
+//import "path/to/js/component/component-name.js";
 </pre>
 
-Динамический импорт можно добавить и для scss файлов (таким же образом, как и для js):
-<pre>
-let context = require.context("./", true, /\.scss$/);
-</pre>
+Динамический импорт можно добавить и для scss файлов (таким же образом, как и для js).
 
 <hr>
 
 Все <b>assets внутри pug</b> файлов подключаются через require:
 <pre>
-img(src = require('./components/plan/img/enter_2.png'), alt = 'photo')
+img(src = require('path/to/asset/asset-name.png'), alt = 'photo')
 </pre>
 
 Все <b>assets внутри scss</b> файлов поключаются через простое указание относительного пути:
 <pre>
-background-image: url(img/enter.png);
+background-image: url(path/to/asset/asset-name.png);
 </pre>
 
 
@@ -121,3 +117,11 @@ background-image: url(img/enter.png);
 <br>
 
 Конфиг webpack.dev.js содержит параметр <a href="https://webpack.js.org/configuration/target/#target"><code>target: "web"</code></a>. И будет содержать до тех пор, пока не будет решена <a href="https://github.com/webpack/webpack-dev-server/issues/2758">проблема совместимости HMR и live reload dev server'а с 5-ой версией webpack'а</a>.
+<br>
+<br>
+
+В папку <code>src/favicon</code> достаточно положить одну иконку <code>favicon.png</code>, favicons webpack plugin сам сгенерит все нужные форматы, а также вставит ссылки на них в секцию head выходного html файла.
+<br>
+<br>
+
+Данный пункт ни на что не влияет, но в целях единообразия <del>(читай перфекционизма)</del> все <b>assets</b> должны иметь имена в стиле <code>lower-case-hyphenated</code>. А каждая <b>html страница</b> содержать в разделе head метатеги, отвечающие за <code>charset, viewport, description, keywords</code>, а также иметь <code>title</code> и <code>lang</code>.
