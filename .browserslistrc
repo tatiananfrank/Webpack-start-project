@@ -1,0 +1,5 @@
+# Browsers that we support
+# Browserslist’s default browsers (> 0.5%, last 2 versions, Firefox ESR, not dead).
+# Run npx browserslist in project directory to see what browsers was selected by your queries
+
+defaults
