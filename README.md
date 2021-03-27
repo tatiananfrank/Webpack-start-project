@@ -3,7 +3,7 @@
 <br>
 Стэк: pug (jade), sass (scss), js.
 <br>
-А также плюшки, вроде <a href="https://babeljs.io/">Babel</a>, <a href="https://github.com/postcss/postcss">postcss</a> (<a href="https://github.com/csstools/postcss-normalize">normalize.css</a>, <a href="https://github.com/csstools/postcss-preset-env#autoprefixer">autoprefixer</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a>), <a href="https://github.com/jantimon/favicons-webpack-plugin">favicons webpack plugin</a>, webpack dev server (с HMR).
+А также плюшки, вроде <a href="https://babeljs.io/">Babel</a>, <a href="https://github.com/postcss/postcss">postcss</a> (<a href="https://github.com/csstools/postcss-normalize">normalize.css</a>, <a href="https://github.com/csstools/postcss-preset-env#autoprefixer">autoprefixer</a>), <a href="https://github.com/jantimon/favicons-webpack-plugin">favicons webpack plugin</a>, webpack dev server (с HMR).
 
 
 <h2>Содержание</h2>
@@ -52,12 +52,10 @@ src/                  # Исходники
     index.pug         
   scss/
     global.scss       # Основные стили проекта
+    normalize.scss    # Импорт библиотеки postcss-normalize
     variables.scss    # Все переменные проекта
-  script.js           # Точка входа вебпака (подлючаем сюда все скрипты компонентов и главный файл стилей)
-  style.scss          # Импорт всех стилей (подключаем сюда все переменные, основные стили и стили компонентов), файл не содержит ничего кроме импортов!
+  script.js           # Точка входа вебпака
 .browserslistrc       # Поддерживаемые проектом браузеры (используется в Babel, postcss)
-babel.config.json     # Конфигурация Babel
-postcss.config.js     # Конфигурация postcss
 webpack.common.js     # Общий конфиг
 webpack.dev.js        # Конфиг для разработки
 webpack.prod.js       # Конфиг для продакшн
@@ -66,42 +64,9 @@ webpack.prod.js       # Конфиг для продакшн
 
 <h2 id="detailed-info">Подробнее</h2>
 
-Каждый <b>pug</b> файл инклюдит внутри себя другие pug файлы:
-<pre>
-include path/to/pug/component/component-name
-</pre>
-
-Все <b>scss</b> файлы импортируются в файл style.scss, который не содержит ничего, кроме импортов:
-<pre>
-// Ниже импортируем все scss файлы из компонентов
-@import "path/to/scss/component/component-name";
-</pre>
-
-Сам style.scss для включения в сборку импортируется в главный файл script.js:
-<pre>
-import './style.scss';
-</pre>
-
-Все <b>js</b> файлы импортируются в главный файл script.js динамически:
-<pre>
-// require.context - динамический подхват всех js и scss файлов
-let context = require.context("./components", true, /\.js$/);
-const importAll = (r) => r.keys().forEach(r);
-importAll(context);
-</pre>
-НО можно и ручками там же:
-<pre>
-// Ниже импортируем все js файлы из компонентов
-//import "path/to/js/component/component-name.js";
-</pre>
-
-Динамический импорт можно добавить и для scss файлов (таким же образом, как и для js).
-
-<hr>
-
 Все <b>assets внутри pug</b> файлов подключаются через require:
 <pre>
-img(src = require('path/to/asset/asset-name.png'), alt = 'photo')
+img(src = require("path/to/asset/" + asset-name.png), alt = "photo")
 </pre>
 
 Все <b>assets внутри scss</b> файлов поключаются через простое указание относительного пути:
@@ -111,10 +76,6 @@ background-image: url(path/to/asset/asset-name.png);
 
 
 <h2 id="bugs&features">Баги и Фичи</h2>
-
-В конфиге Babel <code>preset-env</code> имеет значение <code>"targets": "defaults"</code>, которое является дубляжом содержимого .browserslistrc. Причина кроется в том, что <code>preset-env</code> не распознает значение <code>defaults</code>, указанное в .browserslistrc, поэтому нужно передавать его явно. Подробнее <a href="https://babeljs.io/docs/en/babel-preset-env#no-targets">тут</a>. 
-<br>
-<br>
 
 Конфиг webpack.dev.js содержит параметр <a href="https://webpack.js.org/configuration/target/#target"><code>target: "web"</code></a>. И будет содержать до тех пор, пока не будет решена <a href="https://github.com/webpack/webpack-dev-server/issues/2758">проблема совместимости HMR и live reload dev server'а с 5-ой версией webpack'а</a>.
 <br>
