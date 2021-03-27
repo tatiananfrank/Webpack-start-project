@@ -1,22 +1,30 @@
+@import "../../scss/variables";
+
 .button {
-    outline: none;
-    border: 1px solid #e0e0e0;
-    color: $blue;
     padding: 14px 40px;
-    border-radius: 3px;
+
+    color: $blue;
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
+
+    border: 1px solid $gray;
+    border-radius: 3px;
+    
     cursor: pointer;
+    outline: none;
+    //user-select: none; // To test autoprefixer
 
     &:hover {
+        color: #fff;
+
         background: $blue;
         border: 1px solid $blue;
-        color: #fff;
     }
 
-    &-blue {
+    &_blue {
         color: #fff;
+
         background-color: $blue;
     }
 }

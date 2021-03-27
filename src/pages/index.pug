@@ -8,13 +8,11 @@ html(lang="ru")
         title Пример страницы
         meta(name="description" content="A description of the page")
         meta(name="keywords" content="keyword 1, keyword 2, keyword 3")
-        //link(rel="icon" href=require('../favicon/favicon.ico'))
-        //link(rel="stylesheet" type="text/css" href="style.css")
 
     body
         .wrapper
             +plan({title: "free", price: 0})
             +plan({title: "personal", price: 25})
-            //+plan({title: "business", price: 50, isBusiness: true})
-            +plan({title: "business", price: 50, isBusiness: true, photo: 'enter-2.png'})
+            +plan({title: "business", price: 50, isBusiness: true})
+            //+plan({title: "business", price: 50, isBusiness: true, photo: "plan.png"})
             +plan({title: "ultimate", price: 99})

@@ -1,6 +1,6 @@
 const path = require("path");
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
     mode: "development",
@@ -9,8 +9,8 @@ module.exports = merge(common, {
     target: "web", // Фиксит проблему с не работающим liveReload в devServer'e вплоть до версии 4.0.0-beta.0 
 
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        contentBase: path.resolve(__dirname, "dist"),
+        publicPath: "/",
         compress: true,
         open: true,
         hot: true, // Enables Hot Module Replacement
@@ -18,19 +18,27 @@ module.exports = merge(common, {
 
     module: {
         rules: [{
-                test: /\.(scss|css)$/,
+                test: /\.(scss|sass|css)$/,
                 use: [{
                     loader: "style-loader"
                 }, {
                     loader: "css-loader",
                 }, {
                     loader: "postcss-loader",
-                }, {
-                    loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    "postcss-preset-env" // Includes Autoprefixer
+                                ], [
+                                    "postcss-normalize" // normalize.css
+                                ]
+                            ]
+                        }
+                    }
                 }, {
                     loader: "sass-loader",
                     options: {
-                        sourceMap: true,
                         sassOptions: {
                             outputStyle: "expanded"
                         }
@@ -38,7 +46,5 @@ module.exports = merge(common, {
                 }]
             }
         ]
-    }, 
-
-    plugins: []
+    }
 });

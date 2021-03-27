@@ -2,9 +2,9 @@
 
 const path = require("path");
 /* const fs = require("fs"); */
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 /* function generateHtmlPlugins(templateDir) {
     const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
@@ -23,7 +23,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const htmlPlugins = generateHtmlPlugins("src/pages"); */
 
 module.exports = {
-    context: path.resolve(__dirname, 'src'), //Директория, где находятся все модули
+    context: path.resolve(__dirname, "src"), //Директория, где находятся все модули
 
     entry: {
         main: "./script"
@@ -38,24 +38,27 @@ module.exports = {
     module: {
         rules: [{
                 test: /\.js$/,
-                include: [ path.resolve(__dirname, 'src') ],
+                include: [ path.resolve(__dirname, "src") ],
                 use: {
-                    loader: "babel-loader", // targets внутри конфига можно удалить, если в .browserslistrc указаны значения, отличные от defaults
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env"]
+                    }
                 }
             }, {
-                test: /\.(jade|pug)$/,
+                test: /\.pug$/,
                 loader: "pug-loader"
             }, {
                 test: /\.(png|svg|jpg|jpeg|gif)$/,
-                type: 'asset/resource',
+                type: "asset/resource",
                 generator: {
-                    filename: 'img/[name][ext]' // Куда положить файлы на выходе (в dist) // можно еще добавит [path], чтобы избежать конфликтов между картинками с одинаковыми именами
+                    filename: "img/[name][ext]" // Куда положить файлы на выходе (в dist) // можно еще добавит [path], чтобы избежать конфликтов между картинками с одинаковыми именами
                 }
             }, {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                type: 'asset/resource',
+                type: "asset/resource",
                 generator: {
-                    filename: 'fonts/[name][ext]'
+                    filename: "fonts/[name][ext]"
                 }
             }, 
         ]
@@ -63,8 +66,8 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'pages/index.pug',
+            filename: "index.html",
+            template: "pages/index.pug",
             inject: "body",
         }),
         new FaviconsWebpackPlugin({

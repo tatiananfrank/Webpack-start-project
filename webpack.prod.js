@@ -1,6 +1,7 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(common, {
     mode: "production",
@@ -8,22 +9,30 @@ module.exports = merge(common, {
 
     module: {
         rules: [{
-                test: /\.(scss|css)$/,
+                test: /\.(scss|sass|css)$/,
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: '../', // Specifies a custom public path for the external resources like images, files, etc inside CSS. Works like output.publicPath
+                        publicPath: "../", // Specifies a custom public path for the external resources like images, files, etc inside CSS. Works like output.publicPath
                     }
                 }, {
                     loader: "css-loader",
                 }, {
                     loader: "postcss-loader",
-                }, {
-                    loader: "resolve-url-loader" // нужен для преобразования url в css файле, полученном после всех импортов
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    "postcss-preset-env" // Includes Autoprefixer
+                                ], [
+                                    "postcss-normalize" // normalize.css
+                                ]
+                            ]
+                        }
+                    }
                 }, {
                     loader: "sass-loader",
                     options: {
-                        sourceMap: true,
                         sassOptions: {
                             outputStyle: "expanded"
                         }
@@ -32,6 +41,12 @@ module.exports = merge(common, {
             }
         ]
     }, 
+
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
+    },
 
     plugins: [
         new MiniCssExtractPlugin({

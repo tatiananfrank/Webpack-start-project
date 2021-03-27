@@ -1,5 +1,6 @@
-mixin btn(options)
+mixin button(options)
     -
         var buttonClassName = "button"
-        buttonClassName += options.isBlue ? " button-blue" : ""
+        buttonClassName += options.isBlue ? " button_blue" : ""
+
     button(class = buttonClassName)= options.title || "Button"
