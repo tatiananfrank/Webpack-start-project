@@ -1,5 +1,5 @@
 # Webpack-start-project
-Стартовый проект с Webpack.
+Простенький стартовый проект с Webpack.
 <br>
 Стэк: pug (jade), sass (scss), js.
 <br>
@@ -77,7 +77,7 @@ background-image: url(path/to/asset/asset-name.png);
 
 <h2 id="bugs&features">Баги и Фичи</h2>
 
-Конфиг webpack.dev.js содержит параметр <a href="https://webpack.js.org/configuration/target/#target"><code>target: "web"</code></a>. И будет содержать до тех пор, пока не будет решена <a href="https://github.com/webpack/webpack-dev-server/issues/2758">проблема совместимости HMR и live reload dev server'а с 5-ой версией webpack'а</a>.
+Конфиг webpack.dev.js содержит параметр <a href="https://webpack.js.org/configuration/target/#target"><code>target: "web"</code></a>, чтобы пофиксить <a href="https://github.com/webpack/webpack-dev-server/issues/2758">проблему совместимости HMR и live reload dev server'а с 5-ой версией webpack'а</a>.
 <br>
 <br>
 
@@ -85,4 +85,4 @@ background-image: url(path/to/asset/asset-name.png);
 <br>
 <br>
 
-Данный пункт ни на что не влияет, но в целях единообразия <del>(читай перфекционизма)</del> все <b>assets</b> должны иметь имена в стиле <code>lower-case-hyphenated</code>. А каждая <b>html страница</b> содержать в разделе head метатеги, отвечающие за <code>charset, viewport, description, keywords</code>, а также иметь <code>title</code> и <code>lang</code>.
+Данный пункт ни на что не влияет, но в целях единообразия все <b>assets</b> должны иметь имена в стиле <code>lower-case-hyphenated</code>. А каждая <b>html страница</b> содержать в разделе head метатеги, отвечающие за <code>charset, viewport, description, keywords</code>, а также иметь <code>title</code> и <code>lang</code>.
